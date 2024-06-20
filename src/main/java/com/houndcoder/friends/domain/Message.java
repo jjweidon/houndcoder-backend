@@ -1,21 +1,17 @@
 package com.houndcoder.friends.domain;
 
-import com.houndcoder.members.entity.Member;
+import com.houndcoder.members.domain.Member;
 import com.houndcoder.global.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter @Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "messages")
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Message extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +30,4 @@ public class Message extends BaseEntity {
 
     @Column(name = "sent_at", nullable = false)
     private LocalDateTime sentAt;
-
-    // Getter and Setter methods
 }

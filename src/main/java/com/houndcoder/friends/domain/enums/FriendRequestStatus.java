@@ -1,4 +1,4 @@
-package com.houndcoder.friends.domain;
+package com.houndcoder.friends.domain.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

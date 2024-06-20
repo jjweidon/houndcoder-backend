@@ -1,18 +1,14 @@
-package com.houndcoder.members.entity;
+package com.houndcoder.members.domain;
 
 import com.houndcoder.global.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
+@Getter @Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "blocks")
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Block extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

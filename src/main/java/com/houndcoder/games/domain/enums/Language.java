@@ -1,4 +1,4 @@
-package com.houndcoder.games.domain.vo;
+package com.houndcoder.games.domain.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

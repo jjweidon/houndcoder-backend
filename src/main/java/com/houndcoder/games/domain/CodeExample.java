@@ -1,21 +1,17 @@
 package com.houndcoder.games.domain;
 
-import com.houndcoder.games.domain.vo.Difficulty;
-import com.houndcoder.games.domain.vo.Language;
+import com.houndcoder.games.domain.enums.Difficulty;
+import com.houndcoder.games.domain.enums.Language;
 import com.houndcoder.global.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
+@Getter @Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "code_examples")
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class CodeExample extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

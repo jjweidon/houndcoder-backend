@@ -1,42 +1,40 @@
-package com.houndcoder.members.entity;
+package com.houndcoder.members.domain;
 
+import com.houndcoder.members.domain.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter @Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "members")
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String username;
+    private String nickname;
 
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
     private String password;
 
-    @Column(name = "kakao_id")
     private String kakaoId;
 
-    @Column(name = "google_id")
     private String googleId;
 
-    @Column(name = "github_id")
     private String githubId;
 
-    @Column(name = "last_login")
     private LocalDateTime lastLogin; // 최근 접속일
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public void updateNickname(String nickname){
+        this.nickname = nickname;
+    }
 }
