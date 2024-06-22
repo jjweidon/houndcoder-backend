@@ -1,7 +1,7 @@
 package com.houndcoder.games.domain;
 
 import com.houndcoder.games.domain.enums.Difficulty;
-import com.houndcoder.games.domain.enums.Language;
+import com.houndcoder.global.Language;
 import com.houndcoder.global.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

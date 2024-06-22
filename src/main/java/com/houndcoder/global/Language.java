@@ -1,4 +1,4 @@
-package com.houndcoder.games.domain.enums;
+package com.houndcoder.global;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

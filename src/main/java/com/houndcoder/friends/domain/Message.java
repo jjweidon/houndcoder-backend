@@ -1,5 +1,6 @@
 package com.houndcoder.friends.domain;
 
+import com.houndcoder.friends.domain.enums.MessageStatus;
 import com.houndcoder.members.domain.Member;
 import com.houndcoder.global.BaseEntity;
 import jakarta.persistence.*;
@@ -28,6 +29,7 @@ public class Message extends BaseEntity {
     @Column(nullable = false, length = 500)
     private String content;
 
-    @Column(name = "sent_at", nullable = false)
-    private LocalDateTime sentAt;
+    private LocalDateTime readAt;
+
+    private MessageStatus status;
 }

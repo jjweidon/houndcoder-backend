@@ -14,9 +14,9 @@ public class Hound extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(name = "image_url", nullable = false)
     private String imageUrl;
+
+    private int bonusScore;
 }

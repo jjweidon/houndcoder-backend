@@ -7,20 +7,20 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum FriendStatus {
-    REQUESTED("대기"),
-    ACCEPTED("수락"),
-    REJECTED("거절"),
-    HIDDEN("숨김"),
-    BLOCKED("차단");
+public enum MessageStatus {
+    UNREAD("안읽음"),
+    READ("읽음"),
+    REMOVE("삭제"),
+    FAVORITE("즐겨찾기"),
+    ARCHIVED("보관");
 
     private final String value;
 
     @JsonCreator
-    public static FriendStatus deserializer(String value) {
-        for(FriendStatus friendshipStatus : FriendStatus.values()){
-            if(friendshipStatus.getValue().equals(value)) {
-                return friendshipStatus;
+    public static MessageStatus deserializer(String value) {
+        for(MessageStatus messageStatus : MessageStatus.values()){
+            if(messageStatus.getValue().equals(value)) {
+                return messageStatus;
             }
         }
         return null;

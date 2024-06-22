@@ -27,6 +27,4 @@ public class FriendRequest extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private FriendRequestStatus status;
-
-    // Getter and Setter methods
 }
