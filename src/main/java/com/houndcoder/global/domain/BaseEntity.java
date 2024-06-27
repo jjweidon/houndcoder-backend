@@ -1,9 +1,7 @@
-package com.houndcoder.global;
+package com.houndcoder.global.domain;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.transaction.Transactional;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;

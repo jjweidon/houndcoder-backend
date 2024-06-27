@@ -1,14 +1,15 @@
 package com.houndcoder.games.domain;
 
 import com.houndcoder.games.domain.enums.Difficulty;
-import com.houndcoder.global.Language;
-import com.houndcoder.global.BaseEntity;
+import com.houndcoder.global.domain.Language;
+import com.houndcoder.global.domain.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
-@Getter @Builder
+@Getter @SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "code_examples")
