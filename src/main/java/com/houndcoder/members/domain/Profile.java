@@ -1,16 +1,17 @@
 package com.houndcoder.members.domain;
 
-import com.houndcoder.global.Language;
-import com.houndcoder.global.BaseEntity;
+import com.houndcoder.global.domain.Language;
+import com.houndcoder.global.domain.BaseEntity;
 import com.houndcoder.members.domain.enums.Position;
 import com.houndcoder.members.domain.enums.Tier;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
 @Entity
-@Getter @Builder
+@Getter @SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "profiles")

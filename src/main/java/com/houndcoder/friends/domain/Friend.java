@@ -2,12 +2,13 @@ package com.houndcoder.friends.domain;
 
 import com.houndcoder.friends.domain.enums.FriendStatus;
 import com.houndcoder.members.domain.Member;
-import com.houndcoder.global.BaseEntity;
+import com.houndcoder.global.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
-@Getter @Builder
+@Getter @SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "friends")

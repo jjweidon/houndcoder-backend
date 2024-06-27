@@ -1,4 +1,4 @@
-package com.houndcoder.global;
+package com.houndcoder.global.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
