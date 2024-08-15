@@ -10,27 +10,23 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @SuperBuilder
+@Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "messages")
 public class Message extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "sender_id", nullable = false)
-    private Member sender;
+    @JoinColumn(name = "friendship_id")
+    private Friendship friendship;
 
-    @ManyToOne
-    @JoinColumn(name = "receiver_id", nullable = false)
-    private Member receiver;
-
-    @Column(nullable = false, length = 500)
+    @Column(length = 500)
     private String content;
 
     private LocalDateTime readAt;
 
+    @Enumerated(EnumType.STRING)
     private MessageStatus status;
 }

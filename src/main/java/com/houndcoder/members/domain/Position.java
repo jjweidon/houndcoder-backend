@@ -1,4 +1,4 @@
-package com.houndcoder.global.domain;
+package com.houndcoder.members.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,14 +7,13 @@ import lombok.*;
 @Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "languages")
-public class Language {
+@Table(name = "positions")
+public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "language_id")
     private Long id;
 
     private String name;
 
-    private int totalPlayTime;
+    private int totalCnt;
 }

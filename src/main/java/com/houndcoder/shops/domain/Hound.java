@@ -3,10 +3,9 @@ package com.houndcoder.shops.domain;
 import com.houndcoder.global.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @Entity
-@Getter @SuperBuilder
+@Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "hounds")
@@ -19,5 +18,7 @@ public class Hound extends BaseEntity {
 
     private String imageUrl;
 
-    private int bonusScore;
+    private float bonus;
+
+    private float avoidance;
 }

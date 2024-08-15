@@ -1,42 +1,41 @@
 package com.houndcoder.members.domain;
 
-import com.houndcoder.global.domain.Language;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.houndcoder.global.domain.BaseEntity;
-import com.houndcoder.members.domain.enums.Position;
 import com.houndcoder.members.domain.enums.Tier;
+import com.houndcoder.members.dto.BasicProfileDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Getter @SuperBuilder
+@Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "profiles")
 public class Profile extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "profile_id")
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false, unique = true)
     private Member member;
 
     private String introduction; // 한 줄 소개
 
-    private String profileImage; // 프로필 이미지 url
+    private String imageUrl; // 프로필 이미지 url
 
-    @ElementCollection(targetClass = Language.class)
-    @CollectionTable(name = "profile_languages", joinColumns = @JoinColumn(name = "profile_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Language> languages; // 최대 5개의 주력 언어
+    @JsonIgnore
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlayerLanguage> languages; // 최대 5개의 주력 언어
 
-    @ElementCollection(targetClass = Position.class)
-    @CollectionTable(name = "profile_positions", joinColumns = @JoinColumn(name = "profile_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Position> positions; // 최대 5개의 포지션
+    @JsonIgnore
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlayerPosition> positions; // 최대 5개의 포지션
 
     private Tier tier; // 37단계의 티어
 
@@ -44,15 +43,16 @@ public class Profile extends BaseEntity {
 
     private int score; // 점수
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PlayerHound selectedHound; // 설정된 하운드
+    @JsonIgnore
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlayerHound> hounds; // 사용자의 하운드
 
     public void updateIntroduction(String introduction) {
         this.introduction = introduction;
     }
 
-    public void updateProfileImage(String newUrl) {
-        this.profileImage = newUrl;
+    public void updateImageUrl(String newUrl) {
+        this.imageUrl = newUrl;
     }
 
     public void updateScore(int score) {
@@ -76,5 +76,23 @@ public class Profile extends BaseEntity {
         } else {
             this.tier = Tier.IRON5;
         }
+    }
+
+    public void setPlayerLanguages(List<PlayerLanguage> playerLanguages) {
+        if (playerLanguages.size() > 5) {
+            throw new IllegalArgumentException("Player can select up to 5 languages.");
+        }
+        this.languages = playerLanguages;
+    }
+
+    public void setPlayerPositions(List<PlayerPosition> playerPositions) {
+        if (playerPositions.size() > 5) {
+            throw new IllegalArgumentException("Player can select up to 5 positions.");
+        }
+        this.positions = playerPositions;
+    }
+
+    public void updateWith(final BasicProfileDto dto) {
+        this.introduction = dto.getIntroduction();
     }
 }

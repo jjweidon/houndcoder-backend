@@ -8,9 +8,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum FriendStatus {
-    REQUESTED("대기"),
-    ACCEPTED("수락"),
-    REJECTED("거절"),
+    FAVORITE("즐겨찾기"),
     HIDDEN("숨김"),
     BLOCKED("차단");
 

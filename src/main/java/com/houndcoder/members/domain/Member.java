@@ -1,5 +1,7 @@
 package com.houndcoder.members.domain;
 
+import com.houndcoder.global.domain.BaseEntity;
+import com.houndcoder.members.domain.enums.AuthProvider;
 import com.houndcoder.members.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,15 +10,17 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @SuperBuilder
+@Getter @Builder @Setter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Table(name = "members")
-public class Member {
+public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
+    @Column(unique = true)
     private String nickname;
 
     @Column(nullable = false, unique = true)
@@ -24,13 +28,10 @@ public class Member {
 
     private String password;
 
-    private String kakaoId;
+    @Enumerated(EnumType.STRING)
+    private AuthProvider authProvider;
 
-    private String googleId;
-
-    private String githubId;
-
-    private LocalDateTime lastLogin; // 최근 접속일
+    private LocalDateTime lastLogin;
 
     @Enumerated(EnumType.STRING)
     private Role role;
