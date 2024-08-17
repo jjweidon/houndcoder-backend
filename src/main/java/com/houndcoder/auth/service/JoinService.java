@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import static com.houndcoder.members.domain.enums.Role.ADMIN;
 import static com.houndcoder.members.domain.enums.Role.USER;
 
 @Service
@@ -26,16 +27,16 @@ public class JoinService {
         }
 
         // 닉네임 중복 확인
-        boolean isExistNickname = memberRepository.existsByUsername(joinDTO.getUsername());
+        boolean isExistNickname = memberRepository.existByNickname(joinDTO.getUsername());
         if (isExistNickname) {
             return;
         }
 
         Member data = new Member();
 
-        data.setUsername(joinDTO.getUsername());
+        data.setNickname(joinDTO.getUsername());
         data.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
-        data.setRole("ROLE_ADMIN ");
+        data.setRole(ADMIN);
 
         memberRepository.save(data);
     }

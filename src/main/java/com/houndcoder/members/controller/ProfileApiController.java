@@ -1,5 +1,6 @@
 package com.houndcoder.members.controller;
 
+import com.houndcoder.auth.dto.CustomUserDetails;
 import com.houndcoder.global.dto.ResponseDto;
 import com.houndcoder.members.dto.ProfileRequest;
 import com.houndcoder.members.dto.ProfileResponse;
@@ -18,18 +19,18 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileApiController {
     private final ProfileService profileService;
 
-    @GetMapping("/{memberId}/basic")
-    public ResponseEntity<ResponseDto> getBasicProfile(Authentication authentication, @PathVariable("memberId") Long memberId) {
-        log.info("Request to get basic profile by id-{}", memberId);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(profileService.findBasicProfile(memberId));
-    }
-
-    @PutMapping("/me/basic")
-    public ResponseEntity<ResponseDto> putBasicProfile(Authentication authentication, @RequestBody ProfileRequest dto) {
-        Long memberId = (Long) authentication.getPrincipal();
-        log.info("Request to put basic profile by id-{}", memberId);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(profileService.updateBasicProfile(memberId, dto));
-    }
+//    @GetMapping("/{memberId}/basic")
+//    public ResponseEntity<ResponseDto> getBasicProfile(Authentication authentication, @PathVariable("memberId") Long memberId) {
+//        log.info("Request to GET basic profile by id - {}", memberId);
+//        ProfileResponse response = profileService.findBasicProfile(memberId);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+//
+//    @PutMapping("/me/basic")
+//    public ResponseEntity<ResponseDto> putBasicProfile(Authentication authentication, @RequestBody ProfileRequest request) {
+//        Long memberId = ((CustomUserDetails) authentication.getPrincipal()).getId();
+//        log.info("Request to PUT basic profile by id-{}", memberId);
+//        ProfileResponse response = profileService.updateBasicProfile(memberId, request);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
 }

@@ -1,21 +1,25 @@
 package com.houndcoder.members.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.houndcoder.global.dto.ResponseDto;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter @Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Builder
+@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ProfileResponse implements ResponseDto {
     private String nickname;
-    private String emil;
+    private String email;
     private String introduction;
 
-    public ProfileResponse createWith(final BasicProfileDto basicProfileDto) {
+    public static ProfileResponse createWith(final BasicProfileDto basicProfileDto) {
         return ProfileResponse.builder()
-                .emil(basicProfileDto.get)
+                .nickname(basicProfileDto.getNickname())
+                .email(basicProfileDto.getEmil())
+                .introduction(basicProfileDto.getIntroduction())
                 .build();
     }
 }

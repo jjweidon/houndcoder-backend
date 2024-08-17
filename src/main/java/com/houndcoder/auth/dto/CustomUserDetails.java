@@ -2,30 +2,32 @@ package com.houndcoder.auth.dto;
 
 import com.houndcoder.members.domain.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Slf4j
 @RequiredArgsConstructor
-public class AuthDetails implements UserDetails {
-
+public class CustomUserDetails implements UserDetails {
     private final Member member;
+
+    public Long getId() {
+        return member.getId();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
         Collection<GrantedAuthority> collection = new ArrayList<>();
-
         collection.add(new GrantedAuthority() {
-
             @Override
             public String getAuthority() {
+                log.info("get Authorities role: {}", member.getRole());
                 return member.getRole().getValue();
             }
         });
-
         return collection;
     }
 
@@ -36,9 +38,16 @@ public class AuthDetails implements UserDetails {
 
     @Override
     public String getUsername() {
+        return member.getEmail();
+    }
+
+    public String getNickname() {
         return member.getNickname();
     }
 
+    public String getEmail() {
+        return member.getEmail();
+    }
 
     @Override
     public boolean isAccountNonExpired() {
