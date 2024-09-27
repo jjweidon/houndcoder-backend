@@ -24,10 +24,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     private final JwtUtil jwtUtil;
 
     public LoginFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
-        super();
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
-        setFilterProcessesUrl("/api/v1/login"); // 커스텀 로그인 엔드포인트 설정
+        setFilterProcessesUrl("/api/v1/auth/login"); // 커스텀 로그인 엔드포인트 설정
     }
 
     @Override
@@ -48,10 +47,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         }
     }
 
-    //로그인 성공시 실행하는 메소드 (여기서 JWT를 발급하면 됨)
+    ///로그인 성공시 실행하는 메소드 (여기서 JWT를 발급하면 됨)
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException {
-        log.info("successfulAuthentication called");
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
         String email = customUserDetails.getEmail();
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
@@ -61,7 +59,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = jwtUtil.createJwt(email, role);
 
         response.addHeader("Authorization", "Bearer " + token);
-        response.addHeader("Nickname", customUserDetails.getNickname());
         response.setContentType("application/json");
         log.info("login success");
     }

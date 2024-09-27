@@ -45,7 +45,7 @@ public class SecurityConfig {
         // 허용된 경로
         List<String> permitAllPaths = List.of(
                 "/api/v1/",
-                "/api/v1/signup",
+                "/api/v1/auth/signup",
                 "/api/v1/login",
                 "/api/v1/check/email",
                 "/oauth/**"
@@ -53,27 +53,26 @@ public class SecurityConfig {
 
         // security 기본 설정
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
                 .cors(httpSecurityCorsConfigurer ->
-                        httpSecurityCorsConfigurer.configurationSource(corsFilter()));
+                        httpSecurityCorsConfigurer.configurationSource(corsFilter()))
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
         // authentication 관련 설정
-        http.authorizeHttpRequests((request) -> request
-                .requestMatchers(permitAllPaths.toArray(new String[0])).permitAll()
-                .requestMatchers(
-                        "/api/v1/members/me/**",
-                        "/api/v1/calendars/**",
-                        "/api/v1/daily/**"
-                ).authenticated()
-                .anyRequest().permitAll()
-        );
+        http
+                .authorizeHttpRequests((auth) -> {
+                    // ALL 인증
+                    auth.requestMatchers("/api/v1", "/api/v1/auth/login", "/api/v1/auth/signup").permitAll();
+
+                    auth.anyRequest().authenticated();
+                });
+
         http
                 .addFilterBefore(new JwtFilter(jwtUtil, memberRepository, permitAllPaths), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
-        http
-                .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        
         return http.build();
     }
 
