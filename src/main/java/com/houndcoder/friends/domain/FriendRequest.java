@@ -2,17 +2,16 @@ package com.houndcoder.friends.domain;
 
 import com.houndcoder.friends.domain.enums.FriendRequestStatus;
 import com.houndcoder.members.domain.Member;
-import com.houndcoder.global.domain.BaseEntity;
+import com.houndcoder.global.domain.BaseTime;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "friend_requests")
-public class FriendRequest extends BaseEntity {
+public class FriendRequest extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

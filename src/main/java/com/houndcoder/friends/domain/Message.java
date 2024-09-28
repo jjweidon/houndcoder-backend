@@ -1,11 +1,9 @@
 package com.houndcoder.friends.domain;
 
 import com.houndcoder.friends.domain.enums.MessageStatus;
-import com.houndcoder.members.domain.Member;
-import com.houndcoder.global.domain.BaseEntity;
+import com.houndcoder.global.domain.BaseTime;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Message extends BaseEntity {
+public class Message extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

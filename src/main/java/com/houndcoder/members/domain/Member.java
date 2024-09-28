@@ -1,11 +1,10 @@
 package com.houndcoder.members.domain;
 
-import com.houndcoder.global.domain.BaseEntity;
+import com.houndcoder.global.domain.BaseTime;
 import com.houndcoder.members.domain.enums.AuthProvider;
 import com.houndcoder.members.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
@@ -13,8 +12,7 @@ import java.time.LocalDateTime;
 @Getter @Builder @Setter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@Table(name = "members")
-public class Member extends BaseEntity {
+public class Member extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")

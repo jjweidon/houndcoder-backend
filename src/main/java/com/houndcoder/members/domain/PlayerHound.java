@@ -25,13 +25,15 @@ public class PlayerHound {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "profile_id")
+    @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "hound_id", nullable = false)
     private Hound hound;
 
-    private LocalDateTime gotchaDate;
+    private LocalDateTime gotchaDateTime;
 
     private boolean isMain;
 

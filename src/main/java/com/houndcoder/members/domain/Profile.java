@@ -1,12 +1,11 @@
 package com.houndcoder.members.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.houndcoder.global.domain.BaseEntity;
+import com.houndcoder.global.domain.BaseTime;
 import com.houndcoder.members.domain.enums.Tier;
 import com.houndcoder.members.dto.BasicProfileDto;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "profiles")
-public class Profile extends BaseEntity {
+public class Profile extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "profile_id")

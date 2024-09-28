@@ -1,7 +1,7 @@
 package com.houndcoder.friends.domain;
 
 import com.houndcoder.friends.domain.enums.FriendStatus;
-import com.houndcoder.global.domain.BaseEntity;
+import com.houndcoder.global.domain.BaseTime;
 import com.houndcoder.members.domain.Member;
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,7 +10,7 @@ import lombok.*;
 @Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Friendship extends BaseEntity {
+public class Friendship extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "friendship_id")
