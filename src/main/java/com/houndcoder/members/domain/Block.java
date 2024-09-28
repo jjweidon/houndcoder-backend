@@ -1,16 +1,15 @@
 package com.houndcoder.members.domain;
 
-import com.houndcoder.global.domain.BaseEntity;
+import com.houndcoder.global.domain.BaseTime;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @Entity
-@Getter @SuperBuilder
+@Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "blocks")
-public class Block extends BaseEntity {
+public class Block extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

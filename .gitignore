@@ -38,3 +38,7 @@ out/
 
 ### Project ###
 **/application.yaml
+*.mustache
+
+# macOS system files
+*.DS_Store

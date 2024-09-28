@@ -1,38 +1,19 @@
 package com.houndcoder.global.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Getter
-@AllArgsConstructor
-public enum Language {
-    C("c"),
-    CPP("c++"),
-    CS("c#"),
-    PY("python"),
-    JAVA("java"),
-    JS("javascript"),
-    KT("kotlin"),
-    SWIFT("swift"),
-    GO("go"),
-    RB("ruby");
+@Entity
+@Getter @Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Language {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "language_id")
+    private Long id;
 
-    private final String value;
+    private String name;
 
-    @JsonCreator
-    public static Language deserializer(String value) {
-        for(Language language : Language.values()){
-            if(language.getValue().equals(value)) {
-                return language;
-            }
-        }
-        return null;
-    }
-
-    @JsonValue
-    public String serializer(){
-        return value;
-    }
+    private int totalPlayTime;
 }

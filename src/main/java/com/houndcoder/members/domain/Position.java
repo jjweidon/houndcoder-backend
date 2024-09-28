@@ -1,6 +1,5 @@
-package com.houndcoder.shops.domain;
+package com.houndcoder.members.domain;
 
-import com.houndcoder.global.domain.BaseTime;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,17 +7,11 @@ import lombok.*;
 @Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "hounds")
-public class Hound extends BaseTime {
+@Table(name = "positions")
+public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
-    private String imageUrl;
-
-    private float bonus;
-
-    private float avoidance;
 }

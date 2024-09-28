@@ -1,26 +1,20 @@
 package com.houndcoder.members.domain;
 
-import com.houndcoder.shops.domain.Hound;
+import com.houndcoder.global.domain.Language;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.time.LocalDateTime;
-
 @Entity
-@Getter
-@SuperBuilder
+@Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "player_hounds")
-public class PlayerHound {
+@Table(name = "player_languages")
+public class PlayerLanguage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "player_language_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,14 +24,8 @@ public class PlayerHound {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "hound_id", nullable = false)
-    private Hound hound;
-
-    private LocalDateTime gotchaDateTime;
-
-    private boolean isMain;
+    @JoinColumn(name = "language_id", nullable = false)
+    private Language language;
 
     private int playCount;
-
-    private int bestScore;
 }
