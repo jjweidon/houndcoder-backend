@@ -13,7 +13,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "code_examples")
 public class CodeExample extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

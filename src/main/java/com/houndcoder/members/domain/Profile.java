@@ -24,30 +24,30 @@ public class Profile extends BaseTime {
     @JoinColumn(name = "member_id", nullable = false, unique = true)
     private Member member;
 
-    private String introduction; // 한 줄 소개
+    private String bio;
 
-    private String imageUrl; // 프로필 이미지 url
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PlayerLanguage> languages; // 최대 5개의 주력 언어
+    private String imageUrl;
 
     @JsonIgnore
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PlayerPosition> positions; // 최대 5개의 포지션
-
-    private Tier tier; // 37단계의 티어
-
-    private int rank; // 전체 순위
-
-    private int score; // 점수
+    private List<PlayerLanguage> languages;
 
     @JsonIgnore
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PlayerHound> hounds; // 사용자의 하운드
+    private List<PlayerPosition> positions;
+
+    private Tier tier;
+
+    private int rank;
+
+    private int score;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlayerHound> hounds;
 
     public void updateIntroduction(String introduction) {
-        this.introduction = introduction;
+        this.bio = introduction;
     }
 
     public void updateImageUrl(String newUrl) {
@@ -91,7 +91,7 @@ public class Profile extends BaseTime {
         this.positions = playerPositions;
     }
 
-    public void updateWith(final BasicProfileDto dto) {
-        this.introduction = dto.getIntroduction();
+    public void updateBio(final String bio) {
+        this.bio = bio;
     }
 }
