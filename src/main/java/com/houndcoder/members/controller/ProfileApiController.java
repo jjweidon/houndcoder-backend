@@ -19,18 +19,18 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileApiController {
     private final ProfileService profileService;
 
-//    @GetMapping("/{memberId}/basic")
-//    public ResponseEntity<ResponseDto> getBasicProfile(Authentication authentication, @PathVariable("memberId") Long memberId) {
-//        log.info("Request to GET basic profile by id - {}", memberId);
-//        ProfileResponse response = profileService.findBasicProfile(memberId);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
-//
-//    @PutMapping("/me/basic")
-//    public ResponseEntity<ResponseDto> putBasicProfile(Authentication authentication, @RequestBody ProfileRequest request) {
-//        Long memberId = ((CustomUserDetails) authentication.getPrincipal()).getId();
-//        log.info("Request to PUT basic profile by id-{}", memberId);
-//        ProfileResponse response = profileService.updateBasicProfile(memberId, request);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
+    @GetMapping("/{memberId}/profile")
+    public ResponseEntity<ResponseDto> getBasicProfile(Authentication authentication, @PathVariable("memberId") Long memberId) {
+        log.info("Request to GET basic profile by id - {}", memberId);
+        ProfileResponse response = profileService.findBasicProfile(memberId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/me/profile")
+    public ResponseEntity<ResponseDto> putBasicProfile(Authentication authentication, @RequestBody ProfileRequest request) {
+        Long memberId = ((CustomUserDetails) authentication.getPrincipal()).getId();
+        log.info("Request to PUT basic profile by id-{}", memberId);
+        ProfileResponse response = profileService.updateBasicProfile(memberId, request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

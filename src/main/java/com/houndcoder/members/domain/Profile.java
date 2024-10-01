@@ -46,19 +46,19 @@ public class Profile extends BaseTime {
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlayerHound> hounds;
 
-    public void updateIntroduction(String introduction) {
-        this.bio = introduction;
+    public void updateBio(final String bio) {
+        this.bio = bio;
     }
 
-    public void updateImageUrl(String newUrl) {
+    public void updateImageUrl(final String newUrl) {
         this.imageUrl = newUrl;
     }
 
-    public void updateScore(int score) {
+    public void updateScore(final int score) {
         this.score = score;
     }
 
-    public void updateRank(int rank) {
+    public void updateRank(final int rank) {
         this.rank = rank;
     }
 
@@ -89,9 +89,5 @@ public class Profile extends BaseTime {
             throw new IllegalArgumentException("Player can select up to 5 positions.");
         }
         this.positions = playerPositions;
-    }
-
-    public void updateBio(final String bio) {
-        this.bio = bio;
     }
 }
