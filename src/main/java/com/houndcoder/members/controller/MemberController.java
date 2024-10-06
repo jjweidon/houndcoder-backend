@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/members")
-public class ProfileApiController {
+public class MemberController {
     private final ProfileService profileService;
 
-    @GetMapping("/{memberId}/profile")
+    @GetMapping("/{memberId}/profile/basic")
     public ResponseEntity<ResponseDto> getBasicProfile(Authentication authentication, @PathVariable("memberId") Long memberId) {
         log.info("Request to GET basic profile by id - {}", memberId);
         ProfileResponse response = profileService.findBasicProfile(memberId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/me/profile")
+    @PutMapping("/me/profile/basic")
     public ResponseEntity<ResponseDto> putBasicProfile(Authentication authentication, @RequestBody ProfileRequest request) {
         Long memberId = ((CustomUserDetails) authentication.getPrincipal()).getId();
         log.info("Request to PUT basic profile by id-{}", memberId);

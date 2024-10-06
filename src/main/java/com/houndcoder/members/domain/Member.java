@@ -34,7 +34,6 @@ public class Member extends BaseTime {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public void updateNickname(String nickname){
-        this.nickname = nickname;
-    }
+    public void updateNickname(final String nickname){ this.nickname = nickname; }
+    public void updatePassword(final String password) { this.password = password; }
 }

@@ -1,5 +1,7 @@
 package com.houndcoder.members.service;
 
+import com.houndcoder.global.service.GlobalService;
+import com.houndcoder.members.domain.Member;
 import com.houndcoder.members.domain.Profile;
 import com.houndcoder.members.domain.repository.MemberRepository;
 import com.houndcoder.members.domain.repository.ProfileRepository;
@@ -16,8 +18,10 @@ public class ProfileService {
     private final MemberRepository memberRepository;
     private final ProfileRepository profileRepository;
 
+    private final GlobalService globalService;
+
     public ProfileResponse findBasicProfile(final Long memberId) {
-        Profile profile = findProfileByMemberId(memberId);
+        Profile profile = globalService.findProfileByMemberId(memberId);
         return ProfileResponse.builder()
                 .nickname(profile.getMember().getNickname())
                 .email(profile.getMember().getEmail())
@@ -27,13 +31,7 @@ public class ProfileService {
 
     public ProfileResponse updateBasicProfile(Long memberId, ProfileRequest dto) {
         Profile profile = findProfileByMemberId(memberId);
-        profile.updateIntroduction(dto.);
+        profile.updateBio(dto.getBio());
         return new ProfileDto();
-    }
-
-    private Profile findProfileByMemberId(final Long memberId) {
-        Member member = findMemberById(memberId);
-        return profileRepository.findByMember(member)
-                .orElseThrow(ProfileNotFoundException::new);
     }
 }

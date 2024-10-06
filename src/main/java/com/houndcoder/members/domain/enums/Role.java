@@ -11,22 +11,11 @@ import lombok.RequiredArgsConstructor;
 public enum Role {
     ADMIN("관리자"),
     USER("사용자"),
-    BANNED("영구정지");
+    BANNED("사용정지");
 
     private final String value;
 
-    @JsonCreator
-    public static Role deserializer(String value) {
-        for(Role role : Role.values()){
-            if(role.getValue().equals(value)) {
-                return role;
-            }
-        }
-        return null;
-    }
-
-    @JsonValue
-    public String serializer(){
-        return value;
+    public String getRoleName() {
+        return "ROLE_" + this.name();
     }
 }
