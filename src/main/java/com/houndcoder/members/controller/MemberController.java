@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final ProfileService profileService;
 
+    // 기본 정보 조회
     @GetMapping("/{memberId}/profile/basic")
     public ResponseEntity<ResponseDto> getBasicProfile(Authentication authentication, @PathVariable("memberId") Long memberId) {
         log.info("Request to GET basic profile by id - {}", memberId);
@@ -26,6 +27,7 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // 기본 정보 수정
     @PutMapping("/me/profile/basic")
     public ResponseEntity<ResponseDto> putBasicProfile(Authentication authentication, @RequestBody ProfileRequest request) {
         Long memberId = ((CustomUserDetails) authentication.getPrincipal()).getId();

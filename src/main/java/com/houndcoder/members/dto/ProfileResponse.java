@@ -3,6 +3,7 @@ package com.houndcoder.members.dto;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.houndcoder.global.dto.ResponseDto;
+import com.houndcoder.members.domain.Profile;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -13,13 +14,13 @@ import java.time.LocalDateTime;
 public class ProfileResponse implements ResponseDto {
     private String nickname;
     private String email;
-    private String introduction;
+    private String bio;
 
-    public static ProfileResponse createWith(final BasicProfileDto basicProfileDto) {
+    public static ProfileResponse createWith(final Profile profile) {
         return ProfileResponse.builder()
-                .nickname(basicProfileDto.getNickname())
-                .email(basicProfileDto.getEmil())
-                .introduction(basicProfileDto.getIntroduction())
+                .nickname(profile.getNickname())
+                .email(profile.getMember().getEmail())
+                .bio(profile.getBio())
                 .build();
     }
 }

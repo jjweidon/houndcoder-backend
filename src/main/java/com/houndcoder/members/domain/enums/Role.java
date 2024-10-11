@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 public enum Role {
     ADMIN("관리자"),
     USER("사용자"),
+    TEMP("임시 사용자"),
     BANNED("사용정지");
 
     private final String value;

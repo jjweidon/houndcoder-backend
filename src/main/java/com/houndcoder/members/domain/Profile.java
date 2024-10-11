@@ -20,6 +20,9 @@ public class Profile extends BaseTime {
     @Column(name = "profile_id")
     private Long id;
 
+    @Column(unique = true)
+    private String nickname;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false, unique = true)
     private Member member;
@@ -45,6 +48,8 @@ public class Profile extends BaseTime {
     @JsonIgnore
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlayerHound> hounds;
+
+    public void updateNickname(final String nickname){ this.nickname = nickname; }
 
     public void updateBio(final String bio) {
         this.bio = bio;

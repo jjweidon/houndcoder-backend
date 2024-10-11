@@ -18,9 +18,6 @@ public class Member extends BaseTime {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(unique = true)
-    private String nickname;
-
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -34,6 +31,5 @@ public class Member extends BaseTime {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public void updateNickname(final String nickname){ this.nickname = nickname; }
     public void updatePassword(final String password) { this.password = password; }
 }

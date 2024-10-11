@@ -23,15 +23,15 @@ public class ProfileService {
     public ProfileResponse findBasicProfile(final Long memberId) {
         Profile profile = globalService.findProfileByMemberId(memberId);
         return ProfileResponse.builder()
-                .nickname(profile.getMember().getNickname())
+                .nickname(profile.getNickname())
                 .email(profile.getMember().getEmail())
-                .introduction(profile.getBio())
+                .bio(profile.getBio())
                 .build();
     }
 
     public ProfileResponse updateBasicProfile(Long memberId, ProfileRequest dto) {
-        Profile profile = findProfileByMemberId(memberId);
+        Profile profile = globalService.findProfileByMemberId(memberId);
         profile.updateBio(dto.getBio());
-        return new ProfileDto();
+        return ProfileResponse.createWith(profile);
     }
 }
