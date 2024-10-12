@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ProfileRequest {
     private String nickname;
-    private String emil;
     private String bio;
 }

@@ -7,10 +7,10 @@ public class MemberNotFoundException extends RuntimeException {
     }
 
     public MemberNotFoundException(Long memberId) {
-        super("Member: " + memberId + " 를 찾을 수 없습니다.");
+        super("Member Id: " + memberId + " 를 찾을 수 없습니다.");
     }
 
     public MemberNotFoundException(String email) {
-        super("Member: " + email + " 를 찾을 수 없습니다.");
+        super("Member email: " + email + " 를 찾을 수 없습니다.");
     }
 }

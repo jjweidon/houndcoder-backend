@@ -6,8 +6,6 @@ import com.houndcoder.global.dto.ResponseDto;
 import com.houndcoder.members.domain.Profile;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Builder
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)

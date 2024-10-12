@@ -32,6 +32,15 @@ public class ProfileService {
     public ProfileResponse updateBasicProfile(Long memberId, ProfileRequest dto) {
         Profile profile = globalService.findProfileByMemberId(memberId);
         profile.updateBio(dto.getBio());
+        profile.updateNickname(dto.getNickname());
+        profileRepository.save(profile);
+        return ProfileResponse.createWith(profile);
+    }
+
+    public ProfileResponse updateProfileImage(Long memberId, String imageUrl) {
+        Profile profile = globalService.findProfileByMemberId(memberId);
+        profile.updateImageUrl(imageUrl);
+        profileRepository.save(profile);
         return ProfileResponse.createWith(profile);
     }
 }
