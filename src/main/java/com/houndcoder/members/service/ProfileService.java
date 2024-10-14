@@ -1,7 +1,6 @@
 package com.houndcoder.members.service;
 
 import com.houndcoder.global.service.GlobalService;
-import com.houndcoder.members.domain.Member;
 import com.houndcoder.members.domain.Profile;
 import com.houndcoder.members.domain.repository.MemberRepository;
 import com.houndcoder.members.domain.repository.ProfileRepository;

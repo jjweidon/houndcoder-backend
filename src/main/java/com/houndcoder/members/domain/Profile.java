@@ -7,13 +7,13 @@ import com.houndcoder.members.dto.BasicProfileDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "profiles")
 public class Profile extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,12 +32,14 @@ public class Profile extends BaseTime {
     private String imageUrl;
 
     @JsonIgnore
+    @Builder.Default
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PlayerLanguage> languages;
+    private List<PlayerLanguage> languages = new ArrayList<>();
 
     @JsonIgnore
+    @Builder.Default
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PlayerPosition> positions;
+    private List<PlayerPosition> positions = new ArrayList<>();
 
     private Tier tier;
 

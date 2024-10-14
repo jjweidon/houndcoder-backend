@@ -1,9 +1,13 @@
 package com.houndcoder.members.controller;
 
 import com.houndcoder.auth.dto.CustomUserDetails;
+import com.houndcoder.global.domain.Language;
 import com.houndcoder.global.dto.Response;
 import com.houndcoder.global.dto.ResponseDto;
 import com.houndcoder.global.service.S3Service;
+import com.houndcoder.members.domain.PlayerLanguage;
+import com.houndcoder.members.dto.PlayerLanguagesRequest;
+import com.houndcoder.members.dto.PlayerLanguagesResponse;
 import com.houndcoder.members.dto.ProfileRequest;
 import com.houndcoder.members.dto.ProfileResponse;
 import com.houndcoder.members.service.ProfileService;
@@ -14,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -47,6 +53,23 @@ public class MemberController {
         log.info("Request to PUT profile image of member - {}", memberId);
         String imageUrl = s3Service.uploadFile(file);
         ProfileResponse response = profileService.updateProfileImage(memberId, imageUrl);
+        return new ResponseEntity<>(Response.success(response), HttpStatus.OK);
+    }
+
+    // 주력 언어 조회
+    @GetMapping("/{memberId}/positions")
+    public ResponseEntity<Response<ResponseDto>> getMemberLanguages(@PathVariable("memberId") Long memberId) {
+        log.info("Request to GET languages of member - {}", memberId);
+        PlayerLanguagesResponse response = profileService.getMemberLanguages(memberId);
+        return new ResponseEntity<>(Response.success(response), HttpStatus.OK);
+    }
+
+    // 주력 언어 수정
+    @PutMapping("/me/positions")
+    public ResponseEntity<Response<ResponseDto>> updateMemberLanguages(Authentication authentication, @RequestBody PlayerLanguagesRequest request) {
+        Long memberId = ((CustomUserDetails) authentication.getPrincipal()).getId();
+        log.info("Request to PUT languages of member - {}", memberId);
+        PlayerLanguagesResponse response = profileService.updateMemberLanguages(memberId, request);
         return new ResponseEntity<>(Response.success(response), HttpStatus.OK);
     }
 }
