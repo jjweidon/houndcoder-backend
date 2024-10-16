@@ -27,5 +27,6 @@ public class PlayerLanguage {
     @JoinColumn(name = "language_id", nullable = false)
     private Language language;
 
-    private int playCount;
+    @Builder.Default
+    private int playCount = 0;
 }

@@ -41,13 +41,11 @@ public class CustomUserDetails implements UserDetails {
         return member.getEmail();
     }
 
-    public String getNickname() {
-        return member.getNickname();
-    }
-
     public String getEmail() {
         return member.getEmail();
     }
+
+    public String getRole() { return member.getRole().getRoleName(); }
 
     @Override
     public boolean isAccountNonExpired() {

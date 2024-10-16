@@ -27,6 +27,7 @@ public class MemberService {
         memberRepository.save(newMember);
 
         Profile profile = Profile.builder()
+                .nickname("하운드" + newMember.getId())
                 .member(newMember)
                 .build();
         profileRepository.save(profile);

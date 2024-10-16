@@ -7,58 +7,65 @@ import com.houndcoder.members.dto.BasicProfileDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "profiles")
 public class Profile extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "profile_id")
     private Long id;
 
+    @Column(unique = true)
+    private String nickname;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false, unique = true)
     private Member member;
 
-    private String introduction; // 한 줄 소개
+    private String bio;
 
-    private String imageUrl; // 프로필 이미지 url
+    private String imageUrl;
+
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlayerLanguage> languages = new ArrayList<>();
+
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlayerPosition> positions = new ArrayList<>();
+
+    private Tier tier;
+
+    private int rank;
+
+    private int score;
 
     @JsonIgnore
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PlayerLanguage> languages; // 최대 5개의 주력 언어
+    private List<PlayerHound> hounds;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PlayerPosition> positions; // 최대 5개의 포지션
+    public void updateNickname(final String nickname){ this.nickname = nickname; }
 
-    private Tier tier; // 37단계의 티어
-
-    private int rank; // 전체 순위
-
-    private int score; // 점수
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PlayerHound> hounds; // 사용자의 하운드
-
-    public void updateIntroduction(String introduction) {
-        this.introduction = introduction;
+    public void updateBio(final String bio) {
+        this.bio = bio;
     }
 
-    public void updateImageUrl(String newUrl) {
+    public void updateImageUrl(final String newUrl) {
         this.imageUrl = newUrl;
     }
 
-    public void updateScore(int score) {
+    public void updateScore(final int score) {
         this.score = score;
     }
 
-    public void updateRank(int rank) {
+    public void updateRank(final int rank) {
         this.rank = rank;
     }
 
@@ -89,9 +96,5 @@ public class Profile extends BaseTime {
             throw new IllegalArgumentException("Player can select up to 5 positions.");
         }
         this.positions = playerPositions;
-    }
-
-    public void updateWith(final BasicProfileDto dto) {
-        this.introduction = dto.getIntroduction();
     }
 }
